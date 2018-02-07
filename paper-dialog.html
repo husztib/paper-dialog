@@ -85,7 +85,8 @@ Polymer({
   ],
 
   listeners: {
-    'neon-animation-finish': '_onNeonAnimationFinish'
+    'neon-animation-finish': '_onNeonAnimationFinish',
+	'iron-overlay-opened': '_patchOverlay'
   },
 
   _renderOpened: function() {
@@ -105,5 +106,10 @@ Polymer({
       this._finishRenderClosed();
     }
   }
+  
+  _patchOverlay: function(e) {
+      if (e.target.withBackdrop) {
+        e.target.parentNode.insertBefore(e.target.backdropElement, e.target);
+      }
 });
 </script>
